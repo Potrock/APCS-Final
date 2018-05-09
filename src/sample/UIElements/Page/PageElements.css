@@ -6,7 +6,10 @@
     -fx-stroke-width: 4;
     */
 
-    -fx-height: 200;
-    -fx-width: 300;
+}
+
+.tool-bar {
+
+    -fx-background-color: transparent;
 
 }
