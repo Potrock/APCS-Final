@@ -1,0 +1,12 @@
+#bg{
+    -fx-fill: #383C95;
+
+    /*
+    -fx-stroke: #7274D7;
+    -fx-stroke-width: 4;
+    */
+
+    -fx-height: 200;
+    -fx-width: 300;
+
+}
