@@ -10,15 +10,46 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/AppData/Local/Temp/scoped_dir9200_5088/opencv/build/java/opencv-341.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/commons-io-2.6.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <NATIVE>
-          <root url="file://$USER_HOME$/AppData/Local/Temp/scoped_dir9200_5088/opencv/build/java/x64" />
-        </NATIVE>
-        <SOURCES>
-          <root url="jar://$USER_HOME$/AppData/Local/Temp/scoped_dir9200_5088/opencv/build/java/opencv-341.jar!/" />
-        </SOURCES>
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/library/jai-imageio-core-1.4.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/library/jna-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/library/lept4j-1.6.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/library/tess4j-3.4.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
