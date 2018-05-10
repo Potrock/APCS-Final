@@ -34,21 +34,17 @@ public class LoginPage extends PageElement{
         VBox password_pn = new VBox(password_lbl, password_txtfield, password_feedback);
 
         login_btn = new Button("Login");
-        login_btn.setOnMousePressed(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent t) {
-                //if: username exists
-                //  if: password correct
-                //      --> Menu
-                //  else:
-                //      --> "incorrect password"
-                //else:
-                //  --> "incorrect username" and "incorrect password"
+        login_btn.setOnAction((event) -> {
+            //if: username exists
+            //  if: password correct
+            //      --> Menu
+            //  else:
+            //      --> "incorrect password"
+            //else:
+            //  --> "incorrect username" and "incorrect password"
 
-                username_feedback.setText("incorrect username");
-                password_feedback.setText("incorrect password");
-
-            }
+            username_feedback.setText("incorrect username");
+            password_feedback.setText("incorrect password");
         });
 
         VBox layout_pn = new VBox(username_pn, password_pn, login_btn);
