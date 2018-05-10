@@ -15,6 +15,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.uiElements.page.LoginPage;
 import sample.uiElements.page.MainMenuPage;
+import sample.utility.Screenshot;
+
+import java.awt.*;
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -22,7 +26,7 @@ public class Main extends Application {
     public static boolean logged_in = false;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         BorderPane layout_pn = new BorderPane();
         Scene main_scn = new Scene(layout_pn);
         pageGroup = new Group();
@@ -38,38 +42,42 @@ public class Main extends Application {
         imgView.setFitHeight(30);
         imgView.setId("button_toolbar");
         Tooltip.install(imgView, new Tooltip("Login page"));
-        imgView.setOnMousePressed(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent t) {
-                // --> Login
-                pageGroup.getChildren().clear();
-                pageGroup.getChildren().add(loginPage.get());
-            }
+        imgView.setOnMousePressed((event) -> {
+            // --> Login
+            pageGroup.getChildren().clear();
+            pageGroup.getChildren().add(loginPage.get());
         });
 
         Button quit_btn = new Button("Quit");
         quit_btn.setId("button_toolbar");
-        quit_btn.setOnMousePressed(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent t) {
-                System.exit(0);
-            }
+        quit_btn.setOnAction((event) -> {
+            System.exit(0);
         });
 
         Button menu_btn = new Button("Menu");
         menu_btn.setId("button_toolbar");
-        menu_btn.setOnMousePressed(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent t) {
-                // --> Menu
-                pageGroup.getChildren().clear();
-            }
+        menu_btn.setOnAction((event) -> {
+            // --> Menu
+            pageGroup.getChildren().clear();
         });
 
-        ToolBar toolBar = new ToolBar(imgView, new Separator(), menu_btn, quit_btn);
+        Button test_screenschot = new Button("TEST TAKE SCREENSHOT");
+        test_screenschot.setId("button_toolbar");
+        test_screenschot.setOnAction((event) -> {
+            try {
+                Screenshot.saveScreenshot();
+            } catch (AWTException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+        ToolBar toolBar = new ToolBar(imgView, new Separator(), menu_btn, quit_btn, test_screenschot);
 
         //Center
-        pageGroup.getChildren().add(menuPage.get());
+        pageGroup.getChildren().add(loginPage.get());
 
         //
         layout_pn.setTop(toolBar);
