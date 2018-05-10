@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,7 +9,6 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.uiElements.page.LoginPage;
@@ -34,10 +32,10 @@ public class Main extends Application {
         MainMenuPage menuPage = new MainMenuPage();
         LoginPage loginPage = new LoginPage();
 
-        layout_pn.getStylesheets().addAll("sample/uiElements/ui/rootStylesheet.css");
+        layout_pn.getStylesheets().addAll("sample/uiElements/UI/rootStylesheet.css");
 
         //Top
-        ImageView imgView = new ImageView(new Image("sample/uiElements/ui/logo.png"));
+        ImageView imgView = new ImageView(new Image("sample/uiElements/UI/logo.png"));
         imgView.setFitWidth(30);
         imgView.setFitHeight(30);
         imgView.setId("button_toolbar");

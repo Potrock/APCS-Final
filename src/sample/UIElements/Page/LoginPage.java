@@ -1,11 +1,9 @@
 package sample.uiElements.page;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class LoginPage extends PageElement{
@@ -56,7 +54,7 @@ public class LoginPage extends PageElement{
     }
 
     void setStyles(){
-        out.getStylesheets().addAll("sample/uiElements/page/loginPage.css", "sample/uiElements/ui/ui.css");
+        out.getStylesheets().addAll("sample/uiElements/page/loginPage.css", "sample/uiElements/UI/ui.css");
     }
 
 }
