@@ -1,4 +1,4 @@
-package sample;
+package main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,6 @@ import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,6 +21,9 @@ import java.io.File;
 
 public class Main extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
     @Override
     public void start(Stage primaryStage) throws Exception {
          System.setProperty("jna.library.path", "32".equals(System.getProperty("sun.arch.data.model")) ? "lib/win32-x86" : "lib/win32-x86-64");
@@ -60,8 +62,10 @@ public class Main extends Application {
         System.out.println(question);
         //Filter out lowercase L and spaces from front of answers (shitty OCR tbh, oh well) and print them.
         for(String i : answers) {
-            if (i.charAt(0) == 'l') {
+            if (i.charAt(0) == 'l' || i.charAt(0) == '1' || i.charAt(0) == '|') {
                 i = i.substring(2);
+                System.out.println(i);
+            } else {
                 System.out.println(i);
             }
         }
@@ -70,11 +74,5 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-    }
-
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
