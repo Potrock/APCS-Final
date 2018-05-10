@@ -9,110 +9,100 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.uiElements.page.CamMenuPage;
 
 public class CameraStage {
 
-    public Stage camera_stg;
-    public Scene cam_scn;
+    private Stage camera_stg;
+    private Scene cam_scn;
+    private Pane camera_pn;
 
     private static double xOffset = 0;
     private static double yOffset = 0;
 
-    private int cam_w = 500;
-    private int cam_h = cam_w*16/9;
+    public int cam_w;
+    public int cam_h;
 
     public CameraStage() throws Exception{
-        camera_stg  = new Stage();
+
+        this.camera_stg  = new Stage();
         BorderPane layout = new BorderPane();
-        Pane camera_pn = new Pane();
-        cam_scn = new Scene(layout);
+        camera_pn = new Pane();
+        this.cam_scn = new Scene(layout);
 
         layout.setId("transp");
         camera_pn.setId("transp");
-        cam_scn.setFill(null);
-        camera_stg.initStyle(StageStyle.TRANSPARENT);
+        this.cam_scn.setFill(null);
+        this.camera_stg.initStyle(StageStyle.TRANSPARENT);
 
-        cam_scn.getStylesheets().addAll("sample/uiElements/cameraStage.css", "sample/uiElements/ui/rootStylesheet.css");
+        this.cam_scn.getStylesheets().addAll("sample/uiElements/cameraStage.css", "sample/uiElements/ui/rootStylesheet.css");
 
         //Top
 
-        Button close_btn = new Button("Close");
+        Button close_btn = new Button("Hide");
         close_btn.setId("button_toolbar");
         close_btn.setOnAction((event) -> {
-            camera_stg.close();
+            hideWindow();
         });
 
         ToolBar cam_tool = new ToolBar(close_btn);
-        cam_tool.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
+        cam_tool.setOnMousePressed((event) -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
         });
-        cam_tool.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                camera_stg.setX(event.getScreenX() - xOffset);
-                camera_stg.setY(event.getScreenY() - yOffset);
-            }
+        cam_tool.setOnMouseDragged((event) -> {
+            this.camera_stg.setX(event.getScreenX() - xOffset);
+            this.camera_stg.setY(event.getScreenY() - yOffset);
         });
-
-        // Center
-        Rectangle question_reticle = new Rectangle(cam_w, cam_h);
-        question_reticle.setTranslateX(cam_w);
-        question_reticle.setTranslateY(cam_h);
-        question_reticle.setId("reticle");
-//        System.out.println("question_reticle at: " + (cam_w/(720.0f/80.0f)) + ", " + (cam_h/(1280.0f/200.0f)));
-
-        //80, 200
-        //640, 270
-
-        Rectangle border_reticle = new Rectangle(cam_w, cam_h);
-        border_reticle.setId("reticle");
-
-        camera_pn.getChildren().addAll(border_reticle, question_reticle);
 
         layout.setCenter(camera_pn);
         layout.setTop(cam_tool);
 
-        camera_stg.setTitle("HQ Cheat");
-        camera_stg.setScene(cam_scn);
-        camera_stg.show();
+        this.camera_stg.setTitle("Camera");
+        this.camera_stg.setScene(this.cam_scn);
 
-//        Stage stage = new Stage();
-//        try {
-//            Label lbl = new Label("LABEL");
-//            VBox p = new VBox(lbl);
-//
-//            //make the background of the label white and opaque
-//            lbl.setStyle("-fx-background-color: rgba(255, 255, 255, 1);");
-//
-//            //add some borders to visualise the element' locations
-//            lbl.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, null, null)));
-//            p.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, null)));
-//
-//            Scene scene = new Scene(p);
-//            stage.setScene(scene);
-//
-//            //this is where the transparency is achieved:
-//            //the three layers must be made transparent
-//            //(i)  make the VBox transparent (the 4th parameter is the alpha)
-//            p.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
-//            //(ii) set the scene fill to transparent
-//            scene.setFill(null);
-//            //(iii) set the stage background to transparent
-//            stage.initStyle(StageStyle.TRANSPARENT);
-//
-//            stage.setWidth(200);
-//            stage.setHeight(100);
-//            stage.show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    }
 
+    public void setDim(int width){
+        cam_w = width;
+        cam_h = width*16/9;
+        System.out.print(cam_w + ", " + cam_h);
+        // Center
+        Rectangle question_reticle = new Rectangle(592*cam_w/720, 240*cam_h/1280);
+        question_reticle.setTranslateX(64*cam_w/720);
+        question_reticle.setTranslateY(224*cam_h/1280);
+        question_reticle.setId("reticle");
 
+        Rectangle ans1_reticle = new Rectangle(592*cam_w/720, 96*cam_h/1280);
+        ans1_reticle.setTranslateX(64*cam_w/720);
+        ans1_reticle.setTranslateY(496*cam_h/1280);
+        ans1_reticle.setId("reticle");
 
+        Rectangle ans2_reticle = new Rectangle(592*cam_w/720, 96*cam_h/1280);
+        ans2_reticle.setTranslateX(64*cam_w/720);
+        ans2_reticle.setTranslateY((624)*cam_h/1280);
+        ans2_reticle.setId("reticle");
+
+        Rectangle ans3_reticle = new Rectangle(592*cam_w/720, 96*cam_h/1280);
+        ans3_reticle.setTranslateX(64*cam_w/720);
+        ans3_reticle.setTranslateY((753)*cam_h/1280);
+        ans3_reticle.setId("reticle");
+
+        Rectangle border_reticle = new Rectangle(cam_w, cam_h);
+        border_reticle.setId("reticle");
+
+        camera_pn.getChildren().addAll(border_reticle, question_reticle, ans1_reticle, ans2_reticle, ans3_reticle);
+
+    }
+
+    public void openWindow(){
+        CamMenuPage.cameraOpen = true;
+        this.camera_stg.show();
+    }
+
+    public void hideWindow(){
+        CamMenuPage.cameraOpen = false;
+        this.camera_stg.hide();
     }
 
 }

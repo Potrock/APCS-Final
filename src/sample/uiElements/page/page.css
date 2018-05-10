@@ -2,8 +2,7 @@
     -fx-fill: #383C95;
 }
 
-#login_pn{
-    -fx-padding: 7px;
+#outer_pn{
     -fx-translate-x: 7px;
     -fx-translate-y: 7px;
 }

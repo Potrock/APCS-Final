@@ -6,11 +6,11 @@ import javafx.scene.shape.Rectangle;
 public abstract class PageElement {
 
     Group out;
-    private Rectangle bg;
 
     public PageElement(){
-        this.bg = new Rectangle(400, 400);
-        this.bg.setId("bg");
+
+        Rectangle bg = new Rectangle(400, 400);
+        bg.setId("bg");
         this.out = new Group(bg);
     }
 

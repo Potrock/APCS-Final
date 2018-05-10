@@ -1,6 +1,5 @@
 package sample.utility;
 
-import com.oracle.javafx.jmx.json.JSONException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.simple.JSONArray;
@@ -27,8 +26,6 @@ public class JSONUtility {
             writer.write(jsonArray.toJSONString());
             writer.flush();
             writer.close();
-        }catch (JSONException e){
-
         } catch (IOException e) {
             e.printStackTrace();
         }

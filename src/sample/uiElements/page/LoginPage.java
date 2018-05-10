@@ -21,19 +21,23 @@ public class LoginPage extends PageElement{
 
     public LoginPage() {
         super();
+        setStyles();
 
+        //username
         username_lbl = new Label("Username: ");
         username_txtfield = new TextField();
         username_feedback = new Label("");
         username_feedback.setId("feedBack");
         VBox username_pn = new VBox(username_lbl, username_txtfield, username_feedback);
 
+        //password
         password_lbl = new Label("Password: ");
         password_txtfield = new PasswordField();
         password_feedback = new Label("");
         password_feedback.setId("feedBack");
         VBox password_pn = new VBox(password_lbl, password_txtfield, password_feedback);
 
+        //btns
         login_btn = new Button("Login");
         login_btn.setOnAction((event) -> {
             //if: username exists
@@ -56,16 +60,16 @@ public class LoginPage extends PageElement{
 
         HBox btns = new HBox(login_btn, register_btn);
 
+        //layout
         VBox layout_pn = new VBox(username_pn, password_pn, btns);
-        layout_pn.setId("login_pn");
+        layout_pn.setId("outer_pn");
 
         out.getChildren().add(layout_pn);
 
-        setStyles();
     }
 
     void setStyles(){
-        out.getStylesheets().addAll("sample/uiElements/page/loginPage.css", "sample/uiElements/ui/ui.css");
+        out.getStylesheets().addAll("sample/uiElements/page/page.css", "sample/uiElements/ui/ui.css");
     }
 
 }

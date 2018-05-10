@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,18 +9,12 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.uiElements.CameraStage;
 import sample.uiElements.page.LoginPage;
-import sample.uiElements.page.MainMenuPage;
-import sample.utility.JSONUtility;
-import sample.utility.Screenshot;
-
-import java.awt.*;
-import java.io.IOException;
+import sample.uiElements.page.CamMenuPage;
 
 public class Main extends Application {
 
@@ -38,7 +31,7 @@ public class Main extends Application {
         Scene main_scn = new Scene(layout_pn);
         pageGroup = new Group();
 
-        MainMenuPage menuPage = new MainMenuPage();
+        CamMenuPage menuPage = new CamMenuPage();
         LoginPage loginPage = new LoginPage();
 
         layout_pn.getStylesheets().addAll("sample/uiElements/ui/rootStylesheet.css");
@@ -61,11 +54,12 @@ public class Main extends Application {
             System.exit(0);
         });
 
-        Button menu_btn = new Button("Menu");
-        menu_btn.setId("button_toolbar");
-        menu_btn.setOnAction((event) -> {
+        Button Cam_btn = new Button("Cam");
+        Cam_btn.setId("button_toolbar");
+        Cam_btn.setOnAction((event) -> {
             // --> Menu
             pageGroup.getChildren().clear();
+            pageGroup.getChildren().add(menuPage.get());
         });
 
         Button test_screenschot = new Button("TEST");
@@ -84,33 +78,27 @@ public class Main extends Application {
 //            JSONUtility.getUsers();
 
             //Camera
-            try {
-                CameraStage camera = new CameraStage();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                CameraStage camera = new CameraStage(500);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
 
         });
 
-        ToolBar toolBar = new ToolBar(imgView, new Separator(), quit_btn, menu_btn, test_screenschot);
-        toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
+        ToolBar toolBar = new ToolBar(imgView, new Separator(), quit_btn, Cam_btn);
+        toolBar.setOnMousePressed((event) -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
         });
-        toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                main_stg.setX(event.getScreenX() - xOffset);
-                main_stg.setY(event.getScreenY() - yOffset);
-            }
+        toolBar.setOnMouseDragged((event) -> {
+            main_stg.setX(event.getScreenX() - xOffset);
+            main_stg.setY(event.getScreenY() - yOffset);
         });
 
 
         //Center
-        pageGroup.getChildren().add(loginPage.get());
+        pageGroup.getChildren().add(menuPage.get());
 
         //
         layout_pn.setTop(toolBar);
