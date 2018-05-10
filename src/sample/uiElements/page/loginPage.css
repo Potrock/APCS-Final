@@ -1,0 +1,15 @@
+#bg{
+    -fx-fill: #383C95;
+}
+
+#login_pn{
+    -fx-spacing: 7px;
+    -fx-translate-x: 7px;
+    -fx-translate-y: 7px;
+}
+
+#feedBack{
+     -fx-text-fill: red;
+     -fx-font-family: "Helvetica";
+     -fx-font-size: 10;
+}

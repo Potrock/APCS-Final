@@ -1,12 +1,12 @@
-package sample.UIElements.Page;
+package sample.uiElements.page;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
 
 public abstract class PageElement {
 
-    protected Group out;
-    protected Rectangle bg;
+    Group out;
+    private Rectangle bg;
 
     public PageElement(){
         this.bg = new Rectangle(300, 200);

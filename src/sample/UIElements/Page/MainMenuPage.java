@@ -1,6 +1,4 @@
-package sample.UIElements.Page;
-
-import javafx.scene.shape.Rectangle;
+package sample.uiElements.page;
 
 public class MainMenuPage extends PageElement {
 
