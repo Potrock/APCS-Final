@@ -54,7 +54,7 @@ public class LoginPage extends PageElement{
     }
 
     void setStyles(){
-        out.getStylesheets().addAll("sample/uiElements/page/loginPage.css", "sample/uiElements/UI/ui.css");
+        out.getStylesheets().addAll("sample/uiElements/page/loginPage.css", "sample/uiElements/ui/ui.css");
     }
 
 }

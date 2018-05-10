@@ -32,10 +32,10 @@ public class Main extends Application {
         MainMenuPage menuPage = new MainMenuPage();
         LoginPage loginPage = new LoginPage();
 
-        layout_pn.getStylesheets().addAll("sample/uiElements/UI/rootStylesheet.css");
+        layout_pn.getStylesheets().addAll("sample/uiElements/ui/rootStylesheet.css");
 
         //Top
-        ImageView imgView = new ImageView(new Image("sample/uiElements/UI/logo.png"));
+        ImageView imgView = new ImageView(new Image("sample/uiElements/ui/logo.png"));
         imgView.setFitWidth(30);
         imgView.setFitHeight(30);
         imgView.setId("button_toolbar");
