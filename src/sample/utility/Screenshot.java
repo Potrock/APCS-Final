@@ -11,11 +11,11 @@ import java.io.IOException;
  */
 public class Screenshot {
 
-    public static void saveScreenshot() throws AWTException, IOException{
+    public static void saveScreenshot(int x, int y, int w, int h) throws AWTException, IOException{
         Robot robot = new Robot();
 
-        BufferedImage screenShot = robot.createScreenCapture(new Rectangle(0, 0, 600, 600));
-        ImageIO.write(screenShot, "png", new File("myScreenShot.png"));
+        BufferedImage screenShot = robot.createScreenCapture(new Rectangle(x, y, w, h));
+        ImageIO.write(screenShot, "png", new File("screenshot.png"));
     }
 
 }

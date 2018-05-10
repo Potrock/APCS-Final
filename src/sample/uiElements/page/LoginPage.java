@@ -4,7 +4,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import sample.utility.User;
 
 public class LoginPage extends PageElement{
 
@@ -15,6 +17,7 @@ public class LoginPage extends PageElement{
     private TextField password_txtfield;
     private Label password_feedback;
     private Button login_btn;
+    private Button register_btn;
 
     public LoginPage() {
         super();
@@ -45,7 +48,15 @@ public class LoginPage extends PageElement{
             password_feedback.setText("incorrect password");
         });
 
-        VBox layout_pn = new VBox(username_pn, password_pn, login_btn);
+        register_btn = new Button("Register");
+        register_btn.setTranslateX(30);
+        register_btn.setOnAction((event) -> {
+            User.users.add(new User(username_feedback.getText(), password_feedback.getText()));
+        });
+
+        HBox btns = new HBox(login_btn, register_btn);
+
+        VBox layout_pn = new VBox(username_pn, password_pn, btns);
         layout_pn.setId("login_pn");
 
         out.getChildren().add(layout_pn);

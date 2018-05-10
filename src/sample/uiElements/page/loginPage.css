@@ -3,7 +3,7 @@
 }
 
 #login_pn{
-    -fx-spacing: 7px;
+    -fx-padding: 7px;
     -fx-translate-x: 7px;
     -fx-translate-y: 7px;
 }
