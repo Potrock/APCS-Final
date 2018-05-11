@@ -10,35 +10,29 @@ import sample.utility.User;
 
 public class LoginPage extends PageElement{
 
-    private Label username_lbl;
-    private TextField username_txtfield;
     private Label username_feedback;
-    private Label password_lbl;
-    private TextField password_txtfield;
     private Label password_feedback;
-    private Button login_btn;
-    private Button register_btn;
 
     public LoginPage() {
         super();
         setStyles();
 
         //username
-        username_lbl = new Label("Username: ");
-        username_txtfield = new TextField();
+        Label username_lbl = new Label("Username: ");
+        TextField username_txtfield = new TextField();
         username_feedback = new Label("");
         username_feedback.setId("feedBack");
         VBox username_pn = new VBox(username_lbl, username_txtfield, username_feedback);
 
         //password
-        password_lbl = new Label("Password: ");
-        password_txtfield = new PasswordField();
+        Label password_lbl = new Label("Password: ");
+        TextField password_txtfield = new PasswordField();
         password_feedback = new Label("");
         password_feedback.setId("feedBack");
         VBox password_pn = new VBox(password_lbl, password_txtfield, password_feedback);
 
         //btns
-        login_btn = new Button("Login");
+        Button login_btn = new Button("Login");
         login_btn.setId("button");
         login_btn.setOnAction((event) -> {
             //if: username exists
@@ -53,12 +47,10 @@ public class LoginPage extends PageElement{
             password_feedback.setText("incorrect password");
         });
 
-        register_btn = new Button("Register");
+        Button register_btn = new Button("Register");
         register_btn.setId("button");
         register_btn.setTranslateX(30);
-        register_btn.setOnAction((event) -> {
-            User.users.add(new User(username_feedback.getText(), password_feedback.getText()));
-        });
+        register_btn.setOnAction((event) -> User.users.add(new User(username_feedback.getText(), password_feedback.getText())));
 
         HBox btns = new HBox(login_btn, register_btn);
 

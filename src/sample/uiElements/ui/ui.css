@@ -23,7 +23,7 @@
 
 
 .stackPane {
-    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-background-color: transparent;
 }
 
 .root {

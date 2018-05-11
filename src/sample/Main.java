@@ -12,14 +12,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sample.uiElements.CameraStage;
 import sample.uiElements.page.LoginPage;
 import sample.uiElements.page.CamMenuPage;
 
 public class Main extends Application {
 
     private static Group pageGroup;
-    public static boolean logged_in = false;
+//    public static boolean logged_in = false;
 
     private static double xOffset = 0;
     private static double yOffset = 0;
@@ -50,9 +49,7 @@ public class Main extends Application {
 
         Button quit_btn = new Button("Quit");
         quit_btn.setId("button_toolbar");
-        quit_btn.setOnAction((event) -> {
-            System.exit(0);
-        });
+        quit_btn.setOnAction((event) -> System.exit(0));
 
         Button Cam_btn = new Button("Cam");
         Cam_btn.setId("button_toolbar");
@@ -60,30 +57,6 @@ public class Main extends Application {
             // --> Menu
             pageGroup.getChildren().clear();
             pageGroup.getChildren().add(menuPage.get());
-        });
-
-        Button test_screenschot = new Button("TEST");
-        test_screenschot.setId("button_toolbar");
-        test_screenschot.setOnAction((event) -> {
-            ///screenschot
-//            try {
-//                Screenshot.saveScreenshot();
-//            } catch (AWTException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-            // JSON get
-//            JSONUtility.getUsers();
-
-            //Camera
-//            try {
-//                CameraStage camera = new CameraStage(500);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-
         });
 
         ToolBar toolBar = new ToolBar(imgView, new Separator(), quit_btn, Cam_btn);

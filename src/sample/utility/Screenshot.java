@@ -17,8 +17,8 @@ public class Screenshot {
         return robot.createScreenCapture(new Rectangle(x, y, w, h));
     }
 
-    public static void save(BufferedImage c, String f)throws IOException{
-        ImageIO.write(c, "png", new File(f));
+    public static void save(BufferedImage c) throws IOException{
+        ImageIO.write(c, "png", new File("screenshot.png"));
     }
 
 }

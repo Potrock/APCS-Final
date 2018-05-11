@@ -8,7 +8,13 @@
 }
 
 #feedBack{
-     -fx-text-fill: red;
-     -fx-font-family: "Helvetica";
-     -fx-font-size: 10;
+    -fx-text-fill: red;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 10;
+}
+
+#border{
+    -fx-fill: transparent;
+    -fx-stroke: white;
+    -fx-stroke-width: 2;
 }

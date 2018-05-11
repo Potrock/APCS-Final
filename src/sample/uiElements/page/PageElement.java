@@ -9,7 +9,7 @@ public abstract class PageElement {
 
     public PageElement(){
 
-        Rectangle bg = new Rectangle(400, 400);
+        Rectangle bg = new Rectangle(350, 350);
         bg.setId("bg");
         this.out = new Group(bg);
     }

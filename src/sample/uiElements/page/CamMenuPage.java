@@ -1,11 +1,15 @@
 package sample.uiElements.page;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import sample.uiElements.CameraStage;
 import sample.utility.Screenshot;
 
@@ -18,8 +22,13 @@ public class CamMenuPage extends PageElement {
     private Button showCamera_btn;
     private Button takeScreenshot_btn;
     private TextField dim_txtfield;
+    private Label screenshotFeedback_lbl;
+    private StackPane answer_pn;
+    private ImageView imgView;
 
-    CameraStage camera;
+    private boolean isImage = false;
+
+    private CameraStage camera;
 
     public CamMenuPage() throws Exception{
         super();
@@ -27,25 +36,12 @@ public class CamMenuPage extends PageElement {
 
         camera = new CameraStage();
 
-        //take screenshot
-        takeScreenshot_btn = new Button("Take Screenshot");
-        takeScreenshot_btn.setId("buttonOFF");
-        takeScreenshot_btn.setTextFill(Color.LIGHTBLUE);
-        takeScreenshot_btn.setTranslateX(30);
-        takeScreenshot_btn.setTranslateY(20);
-        takeScreenshot_btn.setTextFill(Color.LIGHTBLUE);
-        takeScreenshot_btn.setOnAction((event) -> {
-            //Camera
-            if(cameraOpen)
-                getScreenschot();
-        });
-
         //open cam
         dim_txtfield = new TextField("300");
 
         showCamera_btn = new Button("Show Camera");
         showCamera_btn.setId("button");
-        showCamera_btn.setTranslateX(30);
+        showCamera_btn.setTranslateX(10);
         showCamera_btn.setOnAction((event) -> {
             //Camera
             if(!cameraOpen) {
@@ -60,7 +56,6 @@ public class CamMenuPage extends PageElement {
             }else{
                 try {
                     takeScreenshot_btn.setTextFill(Color.LIGHTBLUE);
-
                     camera.hideWindow();
                     showCamera_btn.setText("Show Camera");
                 } catch (Exception e) {
@@ -77,21 +72,62 @@ public class CamMenuPage extends PageElement {
 
         HBox openCam_pn = new HBox(input_pn, btn_pn);
 
-        VBox layout_pn = new VBox(openCam_pn, takeScreenshot_btn);
+        //take screenshot
+        takeScreenshot_btn = new Button("Take Screenshot");
+        takeScreenshot_btn.setId("buttonOFF");
+        takeScreenshot_btn.setTextFill(Color.LIGHTBLUE);
+        takeScreenshot_btn.setTranslateX(7);
+        takeScreenshot_btn.setOnAction((event) -> {
+            //Camera
+            if(cameraOpen) {
+                screenshotFeedback_lbl.setText("Screenshot Taken!");
+                if(isImage)
+                    answer_pn.getChildren().remove(imgView);
+                try {
+                    imgView = new ImageView(SwingFXUtils.toFXImage(Screenshot.captureScreenshot((int)camera.camera_stg.getX(), (int)camera.camera_stg.getY()+44, camera.cam_w, camera.cam_h-44), null));
+                } catch (AWTException | IOException e) {
+                    e.printStackTrace();
+                }
+                imgView.setFitWidth(100);
+                imgView.setFitHeight(100*16/9);
+                imgView.setTranslateX(-100);
+                answer_pn.getChildren().add(imgView);
+                getScreenshot();
+                isImage = true;
+            }
+        });
+
+        screenshotFeedback_lbl = new Label(" ");
+        screenshotFeedback_lbl.setTranslateX(20);
+        screenshotFeedback_lbl.setTranslateY(25);
+
+        HBox takeScreenshot_pn = new HBox(takeScreenshot_btn, screenshotFeedback_lbl);
+
+        //Answer
+        Rectangle border = new Rectangle(325, 235, Color.TRANSPARENT);
+        border.setId("border");
+
+        Label answerTitle_lbl = new Label("Answer:");
+        answerTitle_lbl.setStyle("-fx-underline: true;");
+        answerTitle_lbl.setTranslateX(-130);
+        answerTitle_lbl.setTranslateY(-105);
+
+        Label answer_lbl = new Label(" ");
+
+        answer_pn = new StackPane(border, answerTitle_lbl, answer_lbl);
+        answer_pn.setTranslateX(10);
+
+        VBox layout_pn = new VBox(openCam_pn, takeScreenshot_pn, answer_pn);
+        layout_pn.setSpacing(18);
         out.getChildren().addAll(layout_pn);
 
     }
 
-    void getScreenschot(){
+    private void getScreenshot(){
         try {
             System.out.print(camera.cam_w + ", " + (camera.cam_h-44));
 //44
-            Screenshot.save(Screenshot.captureScreenshot(
-                    (int)camera.camera_stg.getX(),
-                    (int)camera.camera_stg.getY()+44,
-                    camera.cam_w,
-                    camera.cam_h-44),
-                    "screenshot.png");
+            Screenshot.save(Screenshot.captureScreenshot((int)camera.camera_stg.getX(), (int)camera.camera_stg.getY()+44, camera.cam_w, camera.cam_h-44));
         } catch (AWTException | IOException e) {
             e.printStackTrace();
         }

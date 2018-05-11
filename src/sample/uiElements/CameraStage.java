@@ -1,10 +1,9 @@
 package sample.uiElements;
 
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -14,7 +13,6 @@ import sample.uiElements.page.CamMenuPage;
 public class CameraStage {
 
     public Stage camera_stg;
-    private Scene cam_scn;
     private Pane camera_pn;
 
     private static double xOffset = 0;
@@ -28,24 +26,23 @@ public class CameraStage {
         this.camera_stg  = new Stage();
         BorderPane layout = new BorderPane();
         camera_pn = new Pane();
-        this.cam_scn = new Scene(layout);
+        Scene cam_scn = new Scene(layout);
 
         layout.setId("transp");
         camera_pn.setId("transp");
-        this.cam_scn.setFill(null);
+        cam_scn.setFill(null);
         this.camera_stg.initStyle(StageStyle.TRANSPARENT);
 
-        this.cam_scn.getStylesheets().addAll("sample/uiElements/cameraStage.css", "sample/uiElements/ui/rootStylesheet.css");
+        cam_scn.getStylesheets().addAll("sample/uiElements/cameraStage.css", "sample/uiElements/ui/rootStylesheet.css");
 
         //Top
 
-        Button close_btn = new Button("Hide");
-        close_btn.setId("button_toolbar");
-        close_btn.setOnAction((event) -> {
-            hideWindow();
-        });
+        ImageView imgView = new ImageView(new Image("sample/uiElements/ui/logo.png"));
+        imgView.setFitWidth(30);
+        imgView.setFitHeight(30);
+//        imgView.setId("button_toolbar");
 
-        ToolBar cam_tool = new ToolBar(close_btn);
+        ToolBar cam_tool = new ToolBar(imgView);
         cam_tool.setOnMousePressed((event) -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
@@ -59,7 +56,7 @@ public class CameraStage {
         layout.setTop(cam_tool);
 
         this.camera_stg.setTitle("Camera");
-        this.camera_stg.setScene(this.cam_scn);
+        this.camera_stg.setScene(cam_scn);
         this.camera_stg.setResizable(false);
 
     }
