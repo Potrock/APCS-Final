@@ -26,7 +26,8 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-         System.setProperty("jna.library.path", "32".equals(System.getProperty("sun.arch.data.model")) ? "lib/win32-x86" : "lib/win32-x86-64");
+
+        System.setProperty("jna.library.path", "32".equals(System.getProperty("sun.arch.data.model")) ? "lib/win32-x86" : "lib/win32-x86-64");
 
         OpenCV.loadLocally();
         Mat img = Imgcodecs.imread("HQquestion.png");
@@ -61,14 +62,15 @@ public class Main extends Application {
 
         System.out.println(question);
         //Filter out lowercase L and spaces from front of answers (shitty OCR tbh, oh well) and print them.
-        for(String i : answers) {
-            if (i.charAt(0) == 'l' || i.charAt(0) == '1' || i.charAt(0) == '|') {
-                i = i.substring(2);
-                System.out.println(i);
+        for(int i = 0; i < answers.length; i++) {
+            if (answers[i].charAt(0) == 'l' || answers[i].charAt(0) == '1' || answers[i].charAt(0) == '|') {
+                answers[i] = answers[i].substring(2);
+                System.out.println(answers[i]);
             } else {
-                System.out.println(i);
+                System.out.println(answers[i]);
             }
         }
+        System.out.println("Answer: " + GoogleSearch.search(question, answers));
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Hello World");
