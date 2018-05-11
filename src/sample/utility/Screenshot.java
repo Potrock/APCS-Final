@@ -14,8 +14,7 @@ public class Screenshot {
     public static BufferedImage captureScreenshot(int x, int y, int w, int h) throws AWTException, IOException{
         Robot robot = new Robot();
 
-        BufferedImage screenShot = robot.createScreenCapture(new Rectangle(x, y, w, h));
-        return screenShot;
+        return robot.createScreenCapture(new Rectangle(x, y, w, h));
     }
 
     public static void save(BufferedImage c, String f)throws IOException{

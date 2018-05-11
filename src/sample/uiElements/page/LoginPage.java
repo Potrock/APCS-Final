@@ -39,6 +39,7 @@ public class LoginPage extends PageElement{
 
         //btns
         login_btn = new Button("Login");
+        login_btn.setId("button");
         login_btn.setOnAction((event) -> {
             //if: username exists
             //  if: password correct
@@ -53,6 +54,7 @@ public class LoginPage extends PageElement{
         });
 
         register_btn = new Button("Register");
+        register_btn.setId("button");
         register_btn.setTranslateX(30);
         register_btn.setOnAction((event) -> {
             User.users.add(new User(username_feedback.getText(), password_feedback.getText()));

@@ -13,7 +13,7 @@ import sample.uiElements.page.CamMenuPage;
 
 public class CameraStage {
 
-    private Stage camera_stg;
+    public Stage camera_stg;
     private Scene cam_scn;
     private Pane camera_pn;
 
@@ -60,13 +60,13 @@ public class CameraStage {
 
         this.camera_stg.setTitle("Camera");
         this.camera_stg.setScene(this.cam_scn);
+        this.camera_stg.setResizable(false);
 
     }
 
     public void setDim(int width){
         cam_w = width;
         cam_h = width*16/9;
-        System.out.print(cam_w + ", " + cam_h);
         // Center
         Rectangle question_reticle = new Rectangle(592*cam_w/720, 240*cam_h/1280);
         question_reticle.setTranslateX(64*cam_w/720);
@@ -102,6 +102,7 @@ public class CameraStage {
 
     public void hideWindow(){
         CamMenuPage.cameraOpen = false;
+        camera_pn.getChildren().clear();
         this.camera_stg.hide();
     }
 

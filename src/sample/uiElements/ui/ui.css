@@ -4,7 +4,7 @@
      -fx-font-weight: bold;
 }
 
-.button {
+#button {
     -fx-background-color: white;
     -fx-text-fill: #383C95;  /* HQ-Blue */
     -fx-font-family: "Helvetica";
@@ -12,6 +12,15 @@
 
     -fx-cursor: hand;
 }
+
+#buttonOFF {
+    -fx-background-color: white;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+
+    -fx-cursor: hand;
+}
+
 
 .stackPane {
     -fx-background-color: rgba(255, 255, 255, 0);
