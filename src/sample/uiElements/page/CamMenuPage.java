@@ -1,10 +1,13 @@
 package sample.uiElements.page;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -38,6 +41,21 @@ public class CamMenuPage extends PageElement {
 
         //open cam
         dim_txtfield = new TextField("300");
+        dim_txtfield.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER))
+            {
+                if(!cameraOpen) {
+                    try {
+                        takeScreenshot_btn.setTextFill(Color.web("#383C95",1.0));
+                        camera.setDim(Integer.parseInt(dim_txtfield.getText()));
+                        camera.openWindow();
+                        showCamera_btn.setText("Hide Camera");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
         showCamera_btn = new Button("Show Camera");
         showCamera_btn.setId("button");
@@ -125,8 +143,7 @@ public class CamMenuPage extends PageElement {
 
     private void getScreenshot(){
         try {
-            System.out.print(camera.cam_w + ", " + (camera.cam_h-44));
-//44
+//            System.out.println(camera.cam_w + ", " + (camera.cam_h-44));
             Screenshot.save(Screenshot.captureScreenshot((int)camera.camera_stg.getX(), (int)camera.camera_stg.getY()+44, camera.cam_w, camera.cam_h-44));
         } catch (AWTException | IOException e) {
             e.printStackTrace();

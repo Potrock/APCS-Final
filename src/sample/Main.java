@@ -18,10 +18,13 @@ import sample.uiElements.page.CamMenuPage;
 public class Main extends Application {
 
     private static Group pageGroup;
-//    public static boolean logged_in = false;
+    public static boolean logged_in = false;
 
     private static double xOffset = 0;
     private static double yOffset = 0;
+
+    public static CamMenuPage menuPage;
+    public static LoginPage loginPage;
 
     @Override
     public void start(Stage primary) throws Exception {
@@ -30,8 +33,8 @@ public class Main extends Application {
         Scene main_scn = new Scene(layout_pn);
         pageGroup = new Group();
 
-        CamMenuPage menuPage = new CamMenuPage();
-        LoginPage loginPage = new LoginPage();
+        menuPage = new CamMenuPage();
+        loginPage = new LoginPage();
 
         layout_pn.getStylesheets().addAll("sample/uiElements/ui/rootStylesheet.css");
 
@@ -40,9 +43,10 @@ public class Main extends Application {
         imgView.setFitWidth(30);
         imgView.setFitHeight(30);
         imgView.setId("button_toolbar");
-        Tooltip.install(imgView, new Tooltip("Login page"));
+        Tooltip.install(imgView, new Tooltip("Logout"));
         imgView.setOnMousePressed((event) -> {
             // --> Login
+            logged_in = false;
             pageGroup.getChildren().clear();
             pageGroup.getChildren().add(loginPage.get());
         });
@@ -55,8 +59,9 @@ public class Main extends Application {
         Cam_btn.setId("button_toolbar");
         Cam_btn.setOnAction((event) -> {
             // --> Menu
-            pageGroup.getChildren().clear();
-            pageGroup.getChildren().add(menuPage.get());
+            if(logged_in) {
+                goCamMenu();
+            }
         });
 
         ToolBar toolBar = new ToolBar(imgView, new Separator(), quit_btn, Cam_btn);
@@ -71,7 +76,7 @@ public class Main extends Application {
 
 
         //Center
-        pageGroup.getChildren().add(menuPage.get());
+        pageGroup.getChildren().add(loginPage.get());
 
         //
         layout_pn.setTop(toolBar);
@@ -80,6 +85,11 @@ public class Main extends Application {
         main_stg.setTitle("HQ Cheat");
         main_stg.setScene(main_scn);
         main_stg.show();
+    }
+
+    public static void goCamMenu(){
+        pageGroup.getChildren().clear();
+        pageGroup.getChildren().add(menuPage.get());
     }
 
     public static void main(String[] args) {

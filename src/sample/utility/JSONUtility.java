@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import sample.uiElements.page.LoginPage;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,13 +16,13 @@ public class JSONUtility {
     private static JSONArray jsonArray = new JSONArray();
     private static ObservableList<User> data = FXCollections.observableArrayList();
 
-    public static void saveUser(User usr){
+    public static void saveUsers(){
         try{
             getUsers();
-            FileWriter writer = new FileWriter("src/sample/utility/users.json");
+            FileWriter writer = new FileWriter("users.json");
             JSONObject newScore = new JSONObject();
-            newScore.put("username", usr.username);
-            newScore.put("password", usr.password);
+            newScore.put("username", LoginPage.username_txtfield.getText());
+            newScore.put("password", LoginPage.password_txtfield.getText());
             jsonArray.add(newScore);
             writer.write(jsonArray.toJSONString());
             writer.flush();
@@ -34,7 +35,7 @@ public class JSONUtility {
 
     public static void getUsers() {
         try {
-            FileReader reader = new FileReader("src/sample/utility/users.json");
+            FileReader reader = new FileReader("users.json");
             JSONParser parser = new JSONParser();
             jsonArray = (JSONArray) parser.parse(reader);
             reader.close();
@@ -43,13 +44,12 @@ public class JSONUtility {
                 JSONObject person = (JSONObject) i;
 
                 String username = (String) person.get("username");
-                System.out.println(username);
+                System.out.print(username + ", ");
 
                 String password = (String) person.get("password");
                 System.out.println(password);
 
                 data.add(new User(username, password));
-                System.out.println(username + ", " + password);
             }
         } catch (Exception e) {
             e.printStackTrace();
