@@ -1,5 +1,3 @@
-package main;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,15 +34,22 @@ public class Main extends Application {
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
         Imgcodecs.imwrite("preprocess/img.png", imgGray);
 
-        Mat imgGaussianBlur = new Mat();
-        Imgproc.GaussianBlur(imgGray,imgGaussianBlur,new Size(3, 3),0);
-        Imgcodecs.imwrite("preprocess/img.png", imgGaussianBlur);
 
-        Mat imgAdaptiveThreshold = new Mat();
-        Imgproc.adaptiveThreshold(imgGaussianBlur, imgAdaptiveThreshold, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C ,Imgproc.THRESH_BINARY, 99, 4);
-        Imgcodecs.imwrite("preprocess/img.png", imgAdaptiveThreshold);
+        //DOESNT WORK WELL WITH THE NEW SCREENSHOT SYSTEM FROM SAWYER. TOO LOW RES FOR AdaptiveThreshold and GaussianBlur.
+
+//        Mat imgGaussianBlur = new Mat();
+//        Imgproc.GaussianBlur(imgGray,imgGaussianBlur,new Size(3, 3),0);
+//        Imgcodecs.imwrite("preprocess/img.png", imgGaussianBlur);
+
+//        Mat imgAdaptiveThreshold = new Mat();
+//        Imgproc.adaptiveThreshold(imgGray, imgAdaptiveThreshold, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C ,Imgproc.THRESH_BINARY, 99, 4);
+//        Imgcodecs.imwrite("preprocess/img.png", imgAdaptiveThreshold);
+
+        //TODO: Merge with Sawyer's screenshot code
+        //TODO: Retrieve x,y,w,h from screenshot system
+
         File imageFile = new File("preprocess/img.png");
-        int x = 0, y = 200, w = 719, h = 250;
+        int x = 0, y = 100, w = 300, h = 100;
         BufferedImage dst = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Image src = ImageIO.read(new File("preprocess/img.png"));
         dst.getGraphics().drawImage(src, 0, 0, w, h, x, y, x + w, y + h, null);
@@ -54,7 +59,7 @@ public class Main extends Application {
         instance.setDatapath(tessDataFolder.getPath());
         instance.setLanguage("eng");
         String question = instance.doOCR(imageFile);
-        x = 65; y = 500; w = 500; h = 1280/4;
+        x = 0; y = 200; w = 300; h = 170;
         dst = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         dst.getGraphics().drawImage(src, 0, 0, w, h, x, y, x + w, y + h, null);
         ImageIO.write(dst, "png", new File("preprocess/img.png"));
