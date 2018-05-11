@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/AppData/Local/Temp/scoped_dir9200_5088/opencv/build/java/opencv-341.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <NATIVE>
+          <root url="file://$USER_HOME$/AppData/Local/Temp/scoped_dir9200_5088/opencv/build/java/x64" />
+        </NATIVE>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/AppData/Local/Temp/scoped_dir9200_5088/opencv/build/java/opencv-341.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="json-20180130" level="project" />
+    <orderEntry type="library" name="json-simple-1.1" level="project" />
+    <orderEntry type="library" name="org.openpnp:opencv:3.2.0-0" level="project" />
+    <orderEntry type="library" name="net.sourceforge.tess4j:tess4j:4.0.0" level="project" />
+    <orderEntry type="library" name="com.google.apis:google-api-services-customsearch:v1-rev50-1.22.0" level="project" />
+  </component>
+</module>
