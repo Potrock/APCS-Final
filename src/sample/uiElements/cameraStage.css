@@ -12,3 +12,9 @@
     -fx-stroke: red;
     -fx-stroke-width: 1;
 }
+
+#reticleINV {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 1;
+}

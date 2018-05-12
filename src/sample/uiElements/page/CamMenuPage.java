@@ -99,6 +99,13 @@ public class CamMenuPage extends PageElement {
             //Camera
             if(cameraOpen) {
                 screenshotFeedback_lbl.setText("Screenshot Taken!");
+                ///hide reticles
+                camera.question_reticle.setId("reticleINV");
+                camera.border_reticle.setId("reticleINV");
+                for(int i = 0 ; i < 3 ; i++){
+                    camera.reticles[i].setId("reticleINV");
+                }
+
                 if(isImage)
                     answer_pn.getChildren().remove(imgView);
                 try {
@@ -106,6 +113,13 @@ public class CamMenuPage extends PageElement {
                 } catch (AWTException | IOException e) {
                     e.printStackTrace();
                 }
+                //show reticles
+                camera.question_reticle.setId("reticle");
+                camera.border_reticle.setId("reticle");
+                for(int i = 0 ; i < 3 ; i++){
+                    camera.reticles[i].setId("reticle");
+                }
+
                 imgView.setFitWidth(100);
                 imgView.setFitHeight(100*16/9);
                 imgView.setTranslateX(-100);

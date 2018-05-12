@@ -27,7 +27,7 @@ public class LoginPage extends PageElement{
 
         //username
         Label username_lbl = new Label("Username: ");
-        username_txtfield = new TextField("Not yet Functional");
+        username_txtfield = new TextField("guest");
         username_feedback = new Label("");
         username_feedback.setId("feedBack");
         VBox username_pn = new VBox(username_lbl, username_txtfield, username_feedback);
@@ -51,15 +51,16 @@ public class LoginPage extends PageElement{
             username_feedback.setText(" ");
             password_feedback.setText(" ");
             for(User n : User.users){
-                if(n.username.equals(username_txtfield.getText())){
+                if(n.username.equals(username_txtfield.getText()) || "guest".equals(username_txtfield.getText())){
                     uExists = true;
-                    if(n.password.equals(password_txtfield.getText())){
+                    if(n.password.equals(password_txtfield.getText()) || "1234".equals(password_txtfield.getText())){
                         pExists = true;
                     }
                 }
             }
             if(uExists && pExists){
                 Main.logged_in = true;
+                Main.loginPrompt_lbl.setText(" ");
                 Main.goCamMenu();
             }else if(uExists){
                 password_feedback.setText("incorrect password");
@@ -81,8 +82,11 @@ public class LoginPage extends PageElement{
 
         HBox btns = new HBox(login_btn, register_btn);
 
+        //message
+        Label message = new Label("guest login info:\nu: guest\np: 1234");
+
         //layout
-        VBox layout_pn = new VBox(username_pn, password_pn, btns, registered_lbl);
+        VBox layout_pn = new VBox(username_pn, password_pn, btns, registered_lbl, message);
         layout_pn.setId("outer_pn");
 
         out.getChildren().add(layout_pn);

@@ -20,6 +20,10 @@ public class CameraStage {
 
     public int cam_w;
     public int cam_h;
+    public Rectangle[] reticles = new Rectangle[3];
+    public Rectangle question_reticle;
+    public Rectangle border_reticle;
+
 
     public CameraStage() throws Exception{
 
@@ -65,30 +69,22 @@ public class CameraStage {
         cam_w = width;
         cam_h = width*16/9;
         // Center
-        Rectangle question_reticle = new Rectangle(592*cam_w/720, 240*cam_h/1280);
+        question_reticle = new Rectangle(592*cam_w/720, 240*cam_h/1280);
         question_reticle.setTranslateX(64*cam_w/720);
         question_reticle.setTranslateY(224*cam_h/1280);
         question_reticle.setId("reticle");
 
-        Rectangle ans1_reticle = new Rectangle(592*cam_w/720, 96*cam_h/1280);
-        ans1_reticle.setTranslateX(64*cam_w/720);
-        ans1_reticle.setTranslateY(496*cam_h/1280);
-        ans1_reticle.setId("reticle");
+        for(int i = 0 ; i < 3 ; i++){
+            reticles[i] = new Rectangle(592*cam_w/720, 96*cam_h/1280);
+            reticles[i].setTranslateX(64*cam_w/720);
+            reticles[i].setTranslateY((496+(128*i))*cam_h/1280);
+            reticles[i].setId("reticle");
+        }
 
-        Rectangle ans2_reticle = new Rectangle(592*cam_w/720, 96*cam_h/1280);
-        ans2_reticle.setTranslateX(64*cam_w/720);
-        ans2_reticle.setTranslateY((624)*cam_h/1280);
-        ans2_reticle.setId("reticle");
-
-        Rectangle ans3_reticle = new Rectangle(592*cam_w/720, 96*cam_h/1280);
-        ans3_reticle.setTranslateX(64*cam_w/720);
-        ans3_reticle.setTranslateY((753)*cam_h/1280);
-        ans3_reticle.setId("reticle");
-
-        Rectangle border_reticle = new Rectangle(cam_w, cam_h);
+        border_reticle = new Rectangle(cam_w, cam_h);
         border_reticle.setId("reticle");
 
-        camera_pn.getChildren().addAll(border_reticle, question_reticle, ans1_reticle, ans2_reticle, ans3_reticle);
+        camera_pn.getChildren().addAll(border_reticle, question_reticle, reticles[0], reticles[1], reticles[2]);
 
     }
 
