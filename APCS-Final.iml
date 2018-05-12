@@ -26,5 +26,7 @@
     <orderEntry type="library" name="org.openpnp:opencv:3.2.0-0" level="project" />
     <orderEntry type="library" name="net.sourceforge.tess4j:tess4j:4.0.0" level="project" />
     <orderEntry type="library" name="com.google.apis:google-api-services-customsearch:v1-rev50-1.22.0" level="project" />
+    <orderEntry type="library" name="com.google.apis:google-api-services-customsearch:v1-rev52-1.20.0" level="project" />
+    <orderEntry type="library" name="com.github.jsurfer:jsurfer-jsonsimple:1.4.2" level="project" />
   </component>
 </module>
