@@ -64,6 +64,7 @@ public class Game {
         dst = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         dst.getGraphics().drawImage(src, 0, 0, w, h, x, y, x + w, y + h, null);
         String[] answers = instance.doOCR(dst).split("\n");
+        Imgcodecs.imwrite("img.png", bufferedImageToMat(dst));
 
         System.out.println(question);
         //Filter out lowercase L and spaces from front of answers (shitty OCR tbh, oh well) and print them.
