@@ -17,6 +17,7 @@ import main.utility.Screenshot;
 import net.sourceforge.tess4j.TesseractException;
 
 import java.awt.*;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -29,6 +30,7 @@ public class CamMenuPage extends PageElement {
     private Label screenshotFeedback_lbl;
     private StackPane answer_pn;
     private ImageView imgView;
+    BufferedImage screenshot;
 
     private boolean isImage = false;
 
@@ -103,7 +105,8 @@ public class CamMenuPage extends PageElement {
                 if(isImage)
                     answer_pn.getChildren().remove(imgView);
                 try {
-                    imgView = new ImageView(SwingFXUtils.toFXImage(Screenshot.captureScreenshot((int)camera.camera_stg.getX(), (int)camera.camera_stg.getY()+44, camera.cam_w, camera.cam_h-44), null));
+                    screenshot = Screenshot.captureScreenshot((int)camera.camera_stg.getX() /*+ 226*/, (int)camera.camera_stg.getY()/*+44*//*+127*/, camera.cam_w, camera.cam_h/*-44*/);
+                    imgView = new ImageView(SwingFXUtils.toFXImage(screenshot, null));
                 } catch (AWTException | IOException e) {
                     e.printStackTrace();
                 }
@@ -149,12 +152,18 @@ public class CamMenuPage extends PageElement {
     }
 
     private BufferedImage getScreenshot(){
-        try {
+
+        if (screenshot != null) {
+            return screenshot;
+        } else {
+
+            try {
 //            System.out.println(camera.cam_w + ", " + (camera.cam_h-44));
-            return Screenshot.save(Screenshot.captureScreenshot((int)camera.camera_stg.getX(), (int)camera.camera_stg.getY()+44, camera.cam_w, camera.cam_h-44));
-        } catch (AWTException | IOException e) {
-            e.printStackTrace();
-            return null;
+                return Screenshot.save(Screenshot.captureScreenshot((int) camera.camera_stg.getX(), (int) camera.camera_stg.getY()/*+44*/, camera.cam_w, camera.cam_h/*-44*/));
+            } catch (AWTException | IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 
