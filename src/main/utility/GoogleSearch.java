@@ -42,6 +42,7 @@ public class GoogleSearch {
                 return "No returns";
             }
         }
+        return null;
     }
 
     private static String getAnswer(Search results, String[] answers, int method) {
