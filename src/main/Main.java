@@ -3,10 +3,7 @@ package main;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Separator;
-import javafx.scene.control.ToolBar;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -26,6 +23,7 @@ public class Main extends Application {
 
     public static CamMenuPage menuPage;
     public static LoginPage loginPage;
+    public static Label loginPrompt_lbl;
     public Game game = new Game();
 
     @Override
@@ -41,6 +39,10 @@ public class Main extends Application {
         layout_pn.getStylesheets().addAll("main/uiElements/ui/rootStylesheet.css");
 
         //Top
+
+        loginPrompt_lbl = new Label(" ");
+        loginPrompt_lbl.setId("label_toolbar");
+
         ImageView imgView = new ImageView(new Image("main/uiElements/ui/logo.png"));
         imgView.setFitWidth(30);
         imgView.setFitHeight(30);
@@ -63,10 +65,12 @@ public class Main extends Application {
             // --> Menu
             if(logged_in) {
                 goCamMenu();
+            }else{
+                loginPrompt_lbl.setText("Login!");
             }
         });
 
-        ToolBar toolBar = new ToolBar(imgView, new Separator(), quit_btn, Cam_btn);
+        ToolBar toolBar = new ToolBar(imgView, new Separator(), quit_btn, Cam_btn, loginPrompt_lbl);
         toolBar.setOnMousePressed((event) -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
