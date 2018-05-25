@@ -10,6 +10,11 @@ import main.Main;
 import main.utility.JSONUtility;
 import main.utility.User;
 
+/**
+ * Inits all UI elements for LoginPage
+ *
+ * @author sawyertang
+ */
 public class LoginPage extends PageElement{
 
     public static TextField username_txtfield;
@@ -19,6 +24,9 @@ public class LoginPage extends PageElement{
     private Label username_feedback;
     private Label password_feedback;
 
+    /**
+     * Constructor that inits all UI elements for LoginPage and adds them to a JavaFX Group
+     */
     public LoginPage() {
         super();
         setStyles();
@@ -28,16 +36,16 @@ public class LoginPage extends PageElement{
         //username
         Label username_lbl = new Label("Username: ");
         username_txtfield = new TextField("guest");
-        username_feedback = new Label("");
-        username_feedback.setId("feedBack");
-        VBox username_pn = new VBox(username_lbl, username_txtfield, username_feedback);
+        this.username_feedback = new Label("");
+        this.username_feedback.setId("feedBack");
+        VBox username_pn = new VBox(username_lbl, username_txtfield, this.username_feedback);
 
         //password
         Label password_lbl = new Label("Password: ");
         password_txtfield = new PasswordField();
-        password_feedback = new Label("");
-        password_feedback.setId("feedBack");
-        VBox password_pn = new VBox(password_lbl, password_txtfield, password_feedback);
+        this.password_feedback = new Label("");
+        this.password_feedback.setId("feedBack");
+        VBox password_pn = new VBox(password_lbl, password_txtfield, this.password_feedback);
 
         //btns
 
@@ -48,8 +56,8 @@ public class LoginPage extends PageElement{
             boolean uExists = false;
             boolean pExists = false;
             System.out.println("==: " + username_txtfield.getText() + ", " + password_txtfield.getText());
-            username_feedback.setText(" ");
-            password_feedback.setText(" ");
+            this.username_feedback.setText(" ");
+            this.password_feedback.setText(" ");
             for(User n : User.users){
                 if(n.username.equals(username_txtfield.getText()) || "guest".equals(username_txtfield.getText())){
                     uExists = true;
@@ -63,10 +71,10 @@ public class LoginPage extends PageElement{
                 Main.loginPrompt_lbl.setText("");
                 Main.goCamMenu();
             }else if(uExists){
-                password_feedback.setText("incorrect password");
+                this.password_feedback.setText("incorrect password");
             }else{
-                username_feedback.setText("incorrect username");
-                password_feedback.setText("incorrect password");
+                this.username_feedback.setText("incorrect username");
+                this.password_feedback.setText("incorrect password");
             }
 
         });
@@ -75,7 +83,7 @@ public class LoginPage extends PageElement{
         register_btn.setId("button");
         register_btn.setTranslateX(30);
         register_btn.setOnAction((event) -> {
-            User.users.add(new User(username_feedback.getText(), password_feedback.getText()));
+            User.users.add(new User(this.username_feedback.getText(), this.password_feedback.getText()));
             JSONUtility.saveUsers();
             registered_lbl.setText("Registered!");
         });
@@ -89,10 +97,13 @@ public class LoginPage extends PageElement{
         VBox layout_pn = new VBox(username_pn, password_pn, btns, registered_lbl, message);
         layout_pn.setId("outer_pn");
 
-        out.getChildren().add(layout_pn);
+        this.out.getChildren().add(layout_pn);
 
     }
 
+    /**
+     * method that sets the .css stylesheets for LoginPage
+     */
     void setStyles(){
         out.getStylesheets().addAll("main/uiElements/page/page.css", "main/uiElements/ui/ui.css");
     }

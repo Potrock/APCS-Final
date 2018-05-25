@@ -9,23 +9,30 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import main.game.Game;
 import main.uiElements.page.LoginPage;
 import main.uiElements.page.CamMenuPage;
 
+/**
+ * The Main Class inits and implements the main stage of the application as well as handling the Page objects
+ *
+ * @author sawyertang
+ */
 public class Main extends Application {
 
     private static Group pageGroup;
-    public static boolean logged_in = false;
+    private static CamMenuPage menuPage;
+    private static LoginPage loginPage;
+    public static Label loginPrompt_lbl;
 
     private static double xOffset = 0;
     private static double yOffset = 0;
+    public static boolean logged_in = false;
 
-    public static CamMenuPage menuPage;
-    public static LoginPage loginPage;
-    public static Label loginPrompt_lbl;
-    public Game game = new Game();
-
+    /**
+     * Start method needed for a JavaFX application
+     *
+     * @param primary not actually included in the program... just needed for JavaFX method declaration
+     */
     @Override
     public void start(Stage primary) throws Exception {
         Stage main_stg = new Stage(StageStyle.TRANSPARENT);
@@ -63,9 +70,9 @@ public class Main extends Application {
         Cam_btn.setId("button_toolbar");
         Cam_btn.setOnAction((event) -> {
             // --> Menu
-            if(logged_in) {
+            if (logged_in) {
                 goCamMenu();
-            }else{
+            } else {
                 loginPrompt_lbl.setText("Login!");
             }
         });
@@ -93,11 +100,19 @@ public class Main extends Application {
         main_stg.show();
     }
 
+    /**
+     * Enables class LoginPage is able to change the Page to CamMenuPage
+     */
     public static void goCamMenu(){
         pageGroup.getChildren().clear();
         pageGroup.getChildren().add(menuPage.get());
     }
 
+    /**
+     * main Java method calls the JavaFX launch(String... args) method which stats the application
+     *
+     * @param args Java args
+     */
     public static void main(String[] args) {
         launch(args);
     }

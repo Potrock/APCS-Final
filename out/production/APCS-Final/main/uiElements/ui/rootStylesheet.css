@@ -8,3 +8,9 @@
 
     -fx-label-padding: 3, 3, 3, 3;
 }
+
+#label_toolbar {
+    -fx-text-fill: #383C95;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+}

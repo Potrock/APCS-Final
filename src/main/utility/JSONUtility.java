@@ -11,13 +11,22 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * managing Users in the application
+ *
+ * @author sawyertang
+ */
 public class JSONUtility {
 
     private static JSONArray jsonArray = new JSONArray();
     private static ObservableList<User> data = FXCollections.observableArrayList();
 
-    public static void saveUsers(){
-        try{
+    /**
+     * retrieves and parses previous interation of the "users.json" file and re-writes the file with new values
+     * mostly copied from last years Final Project
+     */
+    public static void saveUsers() {
+        try {
             getUsers();
             FileWriter writer = new FileWriter("users.json");
             JSONObject newScore = new JSONObject();
@@ -33,6 +42,10 @@ public class JSONUtility {
 
     }
 
+    /**
+     * retrieves and parses "users.json"
+     * mostly copied from last years Final Project
+     */
     public static void getUsers() {
         try {
             FileReader reader = new FileReader("users.json");
