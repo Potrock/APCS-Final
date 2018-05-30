@@ -25,8 +25,8 @@ public class CameraStage {
     private static double xOffset = 0;
     private static double yOffset = 0;
 
-    public int cam_w;
-    public int cam_h;
+    public static int cam_w;
+    public static int cam_h;
 
     /**
      * Constructor inits Stage and its elements

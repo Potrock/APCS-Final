@@ -45,8 +45,7 @@ public class Main extends Application {
 
         layout_pn.getStylesheets().addAll("main/uiElements/ui/rootStylesheet.css");
 
-        //Top
-
+        // Top of border pane: ToolBar
         loginPrompt_lbl = new Label(" ");
         loginPrompt_lbl.setId("label_toolbar");
 
@@ -88,13 +87,14 @@ public class Main extends Application {
         });
 
 
-        //Center
+        // Center of border pane: Menu
         pageGroup.getChildren().add(loginPage.get());
 
-        //
+        // Page layout
         layout_pn.setTop(toolBar);
         layout_pn.setCenter(pageGroup);
 
+        // Stage modifiers
         main_stg.setTitle("HQ Cheat");
         main_stg.setScene(main_scn);
         main_stg.show();
