@@ -60,9 +60,8 @@ public class Game {
         //TODO: Retrieve x,y,w,h from screenshot system
         //TODO: FIX CROPPING WITH SCALED CAMERA... Scale cropping like with reticles
 
-        int x = 0, y = 100, w = 300, h = 100;
+        int x = 0, y = CameraStage.cam_w / 3, w = CameraStage.cam_w, h = CameraStage.cam_w / 3;
         BufferedImage dst = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-//        Imgcodecs.imwrite("img0.png", bufferedImageToMat(dst));
         Image src = matToBufferedImage(imgGray);
         dst.getGraphics().drawImage(src, 0, 0, w, h, x, y, x + w, y + h, null);
         ITesseract instance = new Tesseract();
@@ -70,15 +69,14 @@ public class Game {
         instance.setDatapath(tessDataFolder.getPath());
         instance.setLanguage("eng");
         String question = instance.doOCR(dst);
-//        Imgcodecs.imwrite("img1.png", bufferedImageToMat(dst));
+        Imgcodecs.imwrite("img1.png", bufferedImageToMat(dst));
         x = 0;
-        y = 200;
-        w = 300;
-        h = 170;
+        y = (int)(w * (double)2/(double)3);
+        h = (int)(w * (double)17/(double)30); //170 at 300w
         dst = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         dst.getGraphics().drawImage(src, 0, 0, w, h, x, y, x + w, y + h, null);
         String[] answers = instance.doOCR(dst).split("\n");
-//        Imgcodecs.imwrite("img2.png", bufferedImageToMat(dst));
+        Imgcodecs.imwrite("img2.png", bufferedImageToMat(dst));
 
         System.out.println(question);
         //Filter out lowercase L and spaces from front of answers (shitty OCR tbh, oh well) and print them.
