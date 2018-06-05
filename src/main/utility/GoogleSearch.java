@@ -20,9 +20,9 @@ import java.security.GeneralSecurityException;
 public class GoogleSearch {
 
     private static final String cx = "002863338591013580601:_y2hzypvl08";
-    private static Customsearch cs;
+    private Customsearch cs;
 
-    static {
+    public GoogleSearch() {
         try {
             cs = new Customsearch.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), null)
                     .setApplicationName("APCS-Final")
@@ -33,6 +33,7 @@ public class GoogleSearch {
         }
     }
 
+
     /**
      * <desc. here>
      *
@@ -40,21 +41,13 @@ public class GoogleSearch {
      * @param answers  Array of three strings that are to be Google searched <desc. here>
      * @return A Search object derived from the parameters
      */
-    public static String search(String question, String[] answers) throws IOException {
-        if (question.contains("Which of")) {
-            Customsearch.Cse.List list = cs.cse().list(question).setCx(cx).setFields("queries(request(totalResults))");
-            Search result = list.execute();
-            if (result.getItems() != null)
-                return getAnswer(result, answers, 2);
-        } else {
-            Customsearch.Cse.List list = cs.cse().list(question).setCx(cx);
-            Search result = list.execute();
-            if (result.getItems() != null)
-                return getAnswer(result, answers, 1);
-            else
-                return "No returns";
-        }
-        return null;
+    public String search(String question, String[] answers) throws IOException {
+        Customsearch.Cse.List list = cs.cse().list(question).setCx(cx);
+        Search result = list.execute();
+        if (result.getItems() != null)
+            return getAnswer(result, answers);
+        else
+            return "No returns";
     }
 
     /**
@@ -62,11 +55,9 @@ public class GoogleSearch {
      *
      * @param results <desc. here>
      * @param answers <desc. here>
-     * @param method  <desc. here>
      * @return A String answer
      */
-    private static String getAnswer(Search results, String[] answers, int method) {
-        if (method == 1) {
+    private String getAnswer(Search results, String[] answers) {
             int one = 0, two = 0, three = 0;
             for (Result result : results.getItems()) {
                 for (int i = 0; i < answers.length; i++) {
@@ -89,18 +80,5 @@ public class GoogleSearch {
                 return answers[2];
             else
                 return "I'm not sure, sorry.";
-        } else if (method == 2) {
-            int one = Integer.parseInt(answers[0]);
-            int two = Integer.parseInt(answers[1]);
-            int three = Integer.parseInt(answers[2]);
-
-            if (one > two && one > three)
-                return "The first one";
-            else if (two > one && two > three)
-                return "The second one";
-            else if (three > one && three > two)
-                return "The third one";
-        }
-        return "Whoops";
     }
 }

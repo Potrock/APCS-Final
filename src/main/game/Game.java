@@ -37,6 +37,7 @@ public class Game {
      * @return String answer to the question
      */
     public static String handleScreenshot(BufferedImage buffImg) throws IOException, TesseractException {
+        GoogleSearch search = new GoogleSearch();
         System.setProperty("jna.library.path", "32".equals(System.getProperty("sun.arch.data.model")) ? "lib/win32-x86" : "lib/win32-x86-64");
 
         OpenCV.loadLocally();
@@ -88,8 +89,8 @@ public class Game {
                 System.out.println(answers[i]);
             }
         }
-        System.out.println("Answer: " + GoogleSearch.search(question, answers));
-        return "Answer: " + GoogleSearch.search(question, answers);
+        System.out.println("Answer: " + search.search(question, answers));
+        return "Answer: " + search.search(question, answers);
     }
 
     /**
