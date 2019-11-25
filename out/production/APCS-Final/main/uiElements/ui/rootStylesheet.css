@@ -1,0 +1,16 @@
+#button_toolbar {
+    -fx-background-color: #383C95;  /* HQ-Blue */
+    -fx-text-fill: white;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+
+    -fx-cursor: hand;
+
+    -fx-label-padding: 3, 3, 3, 3;
+}
+
+#label_toolbar {
+    -fx-text-fill: #383C95;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+}
